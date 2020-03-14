@@ -1,11 +1,9 @@
+from math import ceil
+
 def sumPoints(points):
     li = [int(i) for i in points]
-    suma =  sum(li)/10
-    if suma > 9: return 10
-    if suma > 8: return 9
-    if suma > 7: return 8
-    if suma > 6: return 7
-    if suma > 5: return 6
+    grade =  ceil(sum(li)/10)
+    if grade >= 6: return grade
     else: return 5
 
 if __name__ == '__main__':
