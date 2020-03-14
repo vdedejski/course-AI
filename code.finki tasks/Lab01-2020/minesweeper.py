@@ -32,7 +32,7 @@ def left(matrix, i, j, n):
     if j == 0:
         return 0
     else:
-        if matrix[i][j-1] == '#':
+        if matrix[i][j - 1] == '#':
             return 1
         else:
             return 0
@@ -79,7 +79,8 @@ def diagonalbottomright(matrix, i, j, n):
 
 
 if __name__ == '__main__':
-    matrix = []g
+    matrix = []
+    g
 
     n = int(input())
     for i in range(0, n):
@@ -89,13 +90,19 @@ if __name__ == '__main__':
 
     for i in range(len(matrix)):
         for j in range(len(matrix[i])):
-            if matrix[i][j] == '#': continue
+            if matrix[i][j] == '#':
+                continue
             else:
-                object = right(matrix,i,j,n)+top(matrix,i,j,n)+down(matrix,i,j,n)+left(matrix,i,j,n)+diagonaltopright(matrix,i,j,n)+diagonaltopleft(matrix,i,j,n)+diagonalbottomleft(matrix,i,j,n)+diagonalbottomright(matrix,i,j,n)
+                object = right(matrix, i, j, n) + top(matrix, i, j, n) + down(matrix, i, j, n) + left(matrix, i, j,
+                                                                                                      n) + diagonaltopright(
+                    matrix, i, j, n) + diagonaltopleft(matrix, i, j, n) + diagonalbottomleft(matrix, i, j,
+                                                                                             n) + diagonalbottomright(
+                    matrix, i, j, n)
                 matrix[i][j] = str(object)
 
     for i in range(len(matrix)):
         for j in range(len(matrix[i])):
             if j + 1 == len(matrix[i]):
                 print(matrix[i][j])
-            else: print(matrix[i][j] + "   ", end = '')
+            else:
+                print(matrix[i][j] + "   ", end='')
