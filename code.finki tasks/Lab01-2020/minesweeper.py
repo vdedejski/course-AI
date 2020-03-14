@@ -87,8 +87,6 @@ if __name__ == '__main__':
         li = s.split("   ")
         matrix.append(li)
 
-    renewedMatrix = matrix.copy()
-
     for i in range(len(matrix)):
         for j in range(len(matrix[i])):
             if matrix[i][j] == '#': continue
