@@ -78,9 +78,19 @@ def diagonalbottomright(matrix, i, j, n):
             return 0
 
 
+def allAbove(matrix, i, j, n):
+    if matrix[i][j] == '#': return '#'
+    object = right(matrix, i, j, n) + top(matrix, i, j, n) + down(matrix, i, j, n) + left(matrix, i, j,n) + diagonaltopleft(matrix,i, j, n) + diagonalbottomleft(matrix, i, j, n) + diagonalbottomright(matrix, i, j, n) + diagonaltopright(matrix,i,j,n)
+    return object
+
+def print_function(matrix, i, j):
+    if j + 1 == len(matrix[i]):
+        return matrix[i][j]
+    else:
+        return matrix[i][j] + "   "
+
 if __name__ == '__main__':
     matrix = []
-    g
 
     n = int(input())
     for i in range(0, n):
@@ -88,21 +98,25 @@ if __name__ == '__main__':
         li = s.split("   ")
         matrix.append(li)
 
-    for i in range(len(matrix)):
-        for j in range(len(matrix[i])):
-            if matrix[i][j] == '#':
-                continue
-            else:
-                object = right(matrix, i, j, n) + top(matrix, i, j, n) + down(matrix, i, j, n) + left(matrix, i, j,
-                                                                                                      n) + diagonaltopright(
-                    matrix, i, j, n) + diagonaltopleft(matrix, i, j, n) + diagonalbottomleft(matrix, i, j,
-                                                                                             n) + diagonalbottomright(
-                    matrix, i, j, n)
-                matrix[i][j] = str(object)
+    # for i in range(len(matrix)):
+    #     for j in range(len(matrix[i])):
+    #         if matrix[i][j] == '#':
+    #             continue
+    #         else:
+    #             object = right(matrix, i, j, n) + top(matrix, i, j, n) + down(matrix, i, j, n) + left(matrix, i, j,
+    #                                                                                                   n) + diagonaltopright(
+    #                 matrix, i, j, n) + diagonaltopleft(matrix, i, j, n) + diagonalbottomleft(matrix, i, j,
+    #                                                                                          n) + diagonalbottomright(
+    #                 matrix, i, j, n)
+    #             matrix[i][j] = str(object)
 
-    for i in range(len(matrix)):
-        for j in range(len(matrix[i])):
-            if j + 1 == len(matrix[i]):
-                print(matrix[i][j])
-            else:
-                print(matrix[i][j] + "   ", end='')
+    matrix = [[str(allAbove(matrix, i, j, n)) for j in range(0, n)] for i in range(0, n)]
+
+    matix = [[print(print_function(matrix,i,j), end='') for j in range(0,n)] and print("") for i in range(0,n)]
+
+    # for i in range(len(matrix)):
+    #     for j in range(len(matrix[i])):
+    #         if j + 1 == len(matrix[i]):
+    #             print(matrix[i][j])
+    #         else:
+    #             print(matrix[i][j] + "   ", end='')
