@@ -1,5 +1,5 @@
 from random import randint
-
+#Agent sto neznae kaj tera, zatoa dava time execution, se vrti vo loop.
 
 class Player:
     def __init__(self, x=0, y=0):
@@ -10,8 +10,8 @@ class Player:
         self.x = position[0]
         self.y = position[1]
 
-        # print(f'[{position[0]}, {position[1]}]')
-        print(f'I moved {position[2]}, coordinates: {self.x}, {self.y}')
+        print(f'[{self.x}, {self.y}]')
+        # print(f'I moved {position[2]}, coordinates: {self.x}, {self.y}')
 
 
 class Game:
@@ -50,24 +50,37 @@ class Pacman:
             normalPositions = []
             # Looking for wanted positions
 
+
+
             # RightSide
             if self.player.y + 1 != width:
                 if self.game[self.player.x][self.player.y + 1] == '.':
                     wantedPositions.append([self.player.x, self.player.y + 1, 'right'])
+                else:
+                    normalPositions.append([self.player.x, self.player.y + 1, 'right'])
+
             # LeftSide
             if self.player.y - 1 > 0 and self.player.y - 1 < width:
                 if self.game[self.player.x][self.player.y - 1] == '.':
                     wantedPositions.append([self.player.x, self.player.y - 1, 'left'])
+                else:
+                    normalPositions.append([self.player.x, self.player.y - 1, 'left'])
+
             # Top Move
             if self.player.x != 0:
                 if self.game[self.player.x - 1][self.player.y] == '.':
                     wantedPositions.append([self.player.x - 1, self.player.y, 'top'])
+                else:
+                    normalPositions.append([self.player.x - 1, self.player.y, 'top'])
+
             # Down Move
             if self.player.x + 1 != height:
                 if self.game[self.player.x + 1][self.player.y] == '.':
                     wantedPositions.append([self.player.x + 1, self.player.y, 'down'])
+                else:
+                    normalPositions.append([self.player.x + 1, self.player.y, 'down'])
 
-            print(f'Positions avaliable: {wantedPositions}')
+            # print(f'Positions avaliable: {wantedPositions}')
 
             if len(wantedPositions) > 0:
                 randomPosition = randint(0, len(wantedPositions) - 1)
@@ -75,26 +88,8 @@ class Pacman:
                 self.game[wantedPositions[randomPosition][0]][wantedPositions[randomPosition][1]] = '#'
 
             else:
-                # RightSide
-                if self.player.y + 1 != width:
-                    if self.game[self.player.x][self.player.y + 1] == '#':
-                        normalPositions.append([self.player.x, self.player.y + 1, 'right'])
-                # LeftSide
-                if self.player.y - 1 > 0 and self.player.y - 1 < width:
-                    if self.game[self.player.x][self.player.y - 1] == '#':
-                        normalPositions.append([self.player.x, self.player.y - 1, 'left'])
-                # Top Move
-                if self.player.x != 0:
-                    if self.game[self.player.x - 1][self.player.y] == '#':
-                        normalPositions.append([self.player.x - 1, self.player.y, 'top'])
-                # Down Move
-                if self.player.x + 1 != height:
-                    if self.game[self.player.x + 1][self.player.y] == '#':
-                        normalPositions.append([self.player.x + 1, self.player.y, 'down'])
-
-                if (len(normalPositions) > 0):
-                    randomPosition = randint(0, len(normalPositions) - 1)
-                    self.player.move(normalPositions[randomPosition])
+                randomPosition = randint(0, len(normalPositions) - 1)
+                self.player.move(normalPositions[randomPosition])
 
             isThereDots = self.remainingDots(self.game)
 
