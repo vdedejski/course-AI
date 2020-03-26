@@ -21,7 +21,6 @@ class Game:
             matrix = []
         self.matrix = matrix
 
-
 class Pacman:
 
     def __init__(self):
