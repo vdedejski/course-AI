@@ -433,48 +433,66 @@ def uniform_cost_search(problem):
     return graph_search(problem, PriorityQueue(min, lambda a: a.path_cost))
 
 
-def move_d1(list, index):
+def toList(tuple):
+    li = list(tuple)
+    return li
+
+
+def move_d1(current_state_tuple, index):  # Primam torka i index
+    list = toList(current_state_tuple)  # Konvertiram torka vo lista
     if index + 1 >= len(list):
-        return tuple(list)
+        finalTuple = list[:]  # Lista kopiram vo lista
+        return tuple(finalTuple)  # Vrakam torka
 
     value = list[index]
     if list[index + 1] == '|':
         list[index] = '|'
         list[index + 1] = value
-        return tuple(list)
+        finalTuple = list[:]
+        return tuple(finalTuple)
 
 
-def move_d2(list, index):
+def move_d2(current_state_tuple, index):
+    list = toList(current_state_tuple)
+
     if index + 2 >= len(list):
-        return tuple(list)
+        finalTuple = list[:]
+        return tuple(finalTuple)
 
     value = list[index]
     if isinstance(list[index + 1], int) and list[index + 2] == '|':
         list[index] = '|'
         list[index + 2] = value
-        return tuple(list)
+        finalTuple = list[:]
+        return tuple(finalTuple)
 
 
-def move_l1(list, index):
+def move_l1(current_state_tuple, index):
+    list = toList(current_state_tuple)
     if index - 1 < 0:
-        return tuple(list)
+        finalTuple = list[:]
+        return tuple(finalTuple)
 
     value = list[index]
     if list[index - 1] == '|':
         list[index] = '|'
         list[index - 1] = value
-        return tuple(list)
+        finalTuple = list[:]
+        return tuple(finalTuple)
 
 
-def move_l2(list, index):
+def move_l2(current_state_tuple, index):  # Primam torka i index
+    list = toList(current_state_tuple)  # Konvertiram torka vo lista
     if index - 2 < 0:
-        return tuple(list)
+        finalTuple = list[:]  # Lista kopiram vo lista
+        return tuple(finalTuple)  # Vrakam torka
 
     value = list[index]
     if isinstance(list[index - 1], int) and list[index - 2] == '|':
         list[index] = '|'
         list[index - 2] = value
-        return tuple(list)
+        finalTuple = list[:]
+        return tuple(finalTuple)
 
 
 class Disks(Problem):
@@ -484,25 +502,28 @@ class Disks(Problem):
     def successor(self, state):
         successors = dict()
 
-        for i in initialList:
-            if isinstance(i, (int)):
+        initialList = state
 
-                change_list = move_d1(initialList, i)
-                if change_list != initialList:
-                    successors[f'D1: Disk {i}'] = change_list
+        if initialList != None:
+            for i in initialList:
+                if isinstance(i, int):
+                    change_list = move_d1(initialList, i)
+                    if change_list != initialList:
+                        successors[f'D1: Disk {i}'] = change_list
 
-                change_list = move_d2(initialList, i)
-                if change_list != initialList:
-                    successors[f'D2: Disk {i}'] = change_list
+                    change_list = move_d2(initialList, i)
+                    if change_list != initialList:
+                        successors[f'D2: Disk {i}'] = change_list
 
-                change_list = move_l1(initialList, i)
-                if change_list != initialList:
-                    successors[f'L1: Disk {i}'] = change_list
+                    change_list = move_l1(initialList, i)
+                    if change_list != initialList:
+                        successors[f'L1: Disk {i}'] = change_list
 
-                change_list = move_l2(initialList, i)
-                if change_list != initialList:
-                    successors[f'L1: Disk {i}'] = change_list
+                    change_list = move_l2(initialList, i)
+                    if change_list != initialList:
+                        successors[f'L1: Disk {i}'] = change_list
 
+        # print(successors)
         return successors
 
     def actions(self, state):
@@ -536,8 +557,13 @@ if __name__ == '__main__':
 
     goalList.reverse()
 
-    disks = Disks(tuple(initialList), tuple(goalList))
-    # disks = Disks(initialList, goalList)
+    initialList = tuple(initialList)
+    goalList = tuple(goalList)
 
-    result = depth_first_graph_search(disks)
+    # print(goalList)
+    # print(initialList)
+
+    disks = Disks(initialList, goalList)
+
+    result = breadth_first_graph_search(disks)
     print(result)

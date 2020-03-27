@@ -533,7 +533,7 @@ def ProdolzhiNazad(x, y, side, obstacle_list):
         new_side = 'jug'
         while x < 10 and [x + 1, y] not in obstacle_list:
             x += 1
-        return [x, y, new_side]
+        return [x, y, new_side] #Vrakaj i dots list ako [x,y] se vo nea removni gi!!!
 
 
 class Pacman(Problem):
@@ -586,8 +586,8 @@ class Pacman(Problem):
 
 
 if __name__ == '__main__':
-    player_x = int(input())
     player_y = int(input())
+    player_x = 9 - int(input())
 
     look = str(input())
     dots_list = []
@@ -611,3 +611,5 @@ if __name__ == '__main__':
 
     result = breadth_first_graph_search(pacman)
     print(result)
+
+# Stavi ja dots list vo sostojbata i koga se dvizi vrakaj ja celata list
