@@ -1,5 +1,11 @@
-import sys
 import bisect
+
+
+"""
+Дефинирање на класа за структурата на проблемот кој ќе го решаваме со пребарување.
+Класата Problem е апстрактна класа од која правиме наследување за дефинирање на основните 
+карактеристики на секој проблем што сакаме да го решиме
+"""
 
 
 class Problem:
@@ -73,6 +79,12 @@ class Problem:
         :rtype: float
         """
         raise NotImplementedError
+
+
+"""
+Дефинирање на класата за структурата на јазел од пребарување.
+Класата Node не се наследува
+"""
 
 
 class Node:
@@ -156,6 +168,11 @@ class Node:
 
     def __hash__(self):
         return hash(self.state)
+
+
+"""
+Дефинирање на помошни структури за чување на листата на генерирани, но непроверени јазли
+"""
 
 
 class Queue:
@@ -294,280 +311,3 @@ class PriorityQueue(Queue):
         for i, (value, item) in enumerate(self.data):
             if item == key:
                 self.data.pop(i)
-
-
-def tree_search(problem, fringe):
-    """ Пребарувај низ следбениците на даден проблем за да најдеш цел.
-    :param problem: даден проблем
-    :type problem: Problem
-    :param fringe:  празна редица (queue)
-    :type fringe: FIFOQueue or Stack or PriorityQueue
-    :return: Node or None
-    :rtype: Node
-    """
-    fringe.append(Node(problem.initial))
-    while fringe:
-        node = fringe.pop()
-        print(node.state)
-        if problem.goal_test(node.state):
-            return node
-        fringe.extend(node.expand(problem))
-    return None
-
-
-def breadth_first_tree_search(problem):
-    """Експандирај го прво најплиткиот јазол во пребарувачкото дрво.
-    :param problem: даден проблем
-    :type problem: Problem
-    :return: Node or None
-    :rtype: Node
-    """
-    return tree_search(problem, FIFOQueue())
-
-
-def depth_first_tree_search(problem):
-    """Експандирај го прво најдлабокиот јазол во пребарувачкото дрво.
-    :param problem: даден проблем
-    :type problem: Problem
-    :return: Node or None
-    :rtype: Node
-    """
-    return tree_search(problem, Stack())
-
-
-def graph_search(problem, fringe):
-    """Пребарувај низ следбениците на даден проблем за да најдеш цел.
-     Ако до дадена состојба стигнат два пата, употреби го најдобриот пат.
-    :param problem: даден проблем
-    :type problem: Problem
-    :param fringe:  празна редица (queue)
-    :type fringe: FIFOQueue or Stack or PriorityQueue
-    :return: Node or None
-    :rtype: Node
-    """
-    closed = set()
-    fringe.append(Node(problem.initial))
-    while fringe:
-        node = fringe.pop()
-        if problem.goal_test(node.state):
-            return node
-        if node.state not in closed:
-            closed.add(node.state)
-            fringe.extend(node.expand(problem))
-    return None
-
-
-def breadth_first_graph_search(problem):
-    """Експандирај го прво најплиткиот јазол во пребарувачкиот граф.
-    :param problem: даден проблем
-    :type problem: Problem
-    :return: Node or None
-    :rtype: Node
-    """
-    return graph_search(problem, FIFOQueue())
-
-
-def depth_first_graph_search(problem):
-    """Експандирај го прво најдлабокиот јазол во пребарувачкиот граф.
-    :param problem: даден проблем
-    :type problem: Problem
-    :return: Node or None
-    :rtype: Node
-    """
-    return graph_search(problem, Stack())
-
-
-def depth_limited_search(problem, limit=50):
-    """Експандирај го прво најдлабокиот јазол во пребарувачкиот граф
-    со ограничена длабочина.
-    :param problem: даден проблем
-    :type problem: Problem
-    :param limit: лимит за длабочината
-    :type limit: int
-    :return: Node or None
-    :rtype: Node
-    """
-
-    def recursive_dls(node, problem, limit):
-        """Помошна функција за depth limited"""
-        cutoff_occurred = False
-        if problem.goal_test(node.state):
-            return node
-        elif node.depth == limit:
-            return 'cutoff'
-        else:
-            for successor in node.expand(problem):
-                result = recursive_dls(successor, problem, limit)
-                if result == 'cutoff':
-                    cutoff_occurred = True
-                elif result is not None:
-                    return result
-        if cutoff_occurred:
-            return 'cutoff'
-        return None
-
-    return recursive_dls(Node(problem.initial), problem, limit)
-
-
-def iterative_deepening_search(problem):
-    """Експандирај го прво најдлабокиот јазол во пребарувачкиот граф
-    со ограничена длабочина, со итеративно зголемување на длабочината.
-    :param problem: даден проблем
-    :type problem: Problem
-    :return: Node or None
-    :rtype: Node
-    """
-    for depth in range(sys.maxsize):
-        result = depth_limited_search(problem, depth)
-        if result is not 'cutoff':
-            return result
-
-
-def uniform_cost_search(problem):
-    """Експандирај го прво јазолот со најниска цена во пребарувачкиот граф.
-    :param problem: даден проблем
-    :type problem: Problem
-    :return: Node or None
-    :rtype: Node
-    """
-    return graph_search(problem, PriorityQueue(min, lambda a: a.path_cost))
-
-
-def toList(tuple):
-    li = list(tuple)
-    return li
-
-
-def move_d1(current_state_tuple, index):  # Primam torka i index
-    list = toList(current_state_tuple)  # Konvertiram torka vo lista
-    if index + 1 >= len(list):
-        finalTuple = list[:]  # Lista kopiram vo lista
-        return tuple(finalTuple)  # Vrakam torka
-
-    value = list[index]
-    if list[index + 1] == '|':
-        list[index] = '|'
-        list[index + 1] = value
-        finalTuple = list[:]
-        return tuple(finalTuple)
-
-
-def move_d2(current_state_tuple, index):
-    list = toList(current_state_tuple)
-
-    if index + 2 >= len(list):
-        finalTuple = list[:]
-        return tuple(finalTuple)
-
-    value = list[index]
-    if isinstance(list[index + 1], int) and list[index + 2] == '|':
-        list[index] = '|'
-        list[index + 2] = value
-        finalTuple = list[:]
-        return tuple(finalTuple)
-
-
-def move_l1(current_state_tuple, index):
-    list = toList(current_state_tuple)
-    if index - 1 < 0:
-        finalTuple = list[:]
-        return tuple(finalTuple)
-
-    value = list[index]
-    if list[index - 1] == '|':
-        list[index] = '|'
-        list[index - 1] = value
-        finalTuple = list[:]
-        return tuple(finalTuple)
-
-
-def move_l2(current_state_tuple, index):  # Primam torka i index
-    list = toList(current_state_tuple)  # Konvertiram torka vo lista
-    if index - 2 < 0:
-        finalTuple = list[:]  # Lista kopiram vo lista
-        return tuple(finalTuple)  # Vrakam torka
-
-    value = list[index]
-    if isinstance(list[index - 1], int) and list[index - 2] == '|':
-        list[index] = '|'
-        list[index - 2] = value
-        finalTuple = list[:]
-        return tuple(finalTuple)
-
-
-class Disks(Problem):
-    def __init__(self, initial, goal=None):
-        super().__init__(initial, goal)
-
-    def successor(self, state):
-        successors = dict()
-
-        initialList = state
-        i = 0
-        index = 1
-        if initialList != None:
-            while index < len(initialList) + 1:
-
-                if isinstance(i, int):
-                    change_list = move_d1(initialList, i)
-                    if change_list != initialList:
-                        successors[f'D1: Disk {index}'] = change_list
-
-                    change_list = move_d2(initialList, i)
-                    if change_list != initialList:
-                        successors[f'D2: Disk {index}'] = change_list
-
-                    change_list = move_l1(initialList, i)
-                    if change_list != initialList:
-                        successors[f'L1: Disk {index}'] = change_list
-
-                    change_list = move_l2(initialList, i)
-                    if change_list != initialList:
-                        successors[f'L1: Disk {index}'] = change_list
-
-                    i += 1
-                    index += 1
-
-        return successors
-
-    def actions(self, state):
-        return self.successor(state).keys()
-
-    def result(self, state, action):
-        return self.successor(state)[action]
-
-    def goal_test(self, state):
-        return state == self.goal
-
-
-if __name__ == '__main__':
-    nDisks = int(input())
-    slots = int(input())
-
-    initialList = []
-    goalList = []
-
-    for i in range(1, nDisks + 1):
-        initialList.append(i)
-
-    for i in range(slots - nDisks):
-        initialList.append("|")
-
-    for i in range(1, nDisks + 1):
-        goalList.append(i)
-
-    for i in range(slots - nDisks):
-        goalList.append("|")
-
-    goalList.reverse()
-
-    initialList = tuple(initialList)
-    goalList = tuple(goalList)
-
-    # print(goalList)
-    # print(initialList)
-
-    disks = Disks(initialList, goalList)
-
-    result = breadth_first_graph_search(disks)
-    print(result.solution())

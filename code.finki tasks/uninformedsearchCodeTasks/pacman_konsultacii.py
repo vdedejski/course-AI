@@ -437,34 +437,34 @@ def SvrtiDesno(x, y, side, obstacle_list, dots):
     dots_list_new = list(dots)
     if side == 'istok':
         new_side = 'jug'
-        while x < 10 and [x + 1, y] not in obstacle_list:
+        if x < 9 and [x + 1, y] not in obstacle_list:
             x += 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'zapad':
         new_side = 'sever'
-        while x > 0 and x < 10 and [x - 1, y] not in obstacle_list:
+        if x > 0 and [x - 1, y] not in obstacle_list:
             x -= 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'jug':
         new_side = 'zapad'
-        while y > 0 and y < 10 and [x, y - 1] not in obstacle_list:
+        if y > 0 and [x, y - 1] not in obstacle_list:
             y -= 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'sever':
         new_side = 'istok'
-        while y < 10 and [x, y + 1] not in obstacle_list:
+        if y < 9 and [x, y + 1] not in obstacle_list:
             y += 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x,y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
 
@@ -472,33 +472,34 @@ def SvrtiLevo(x, y, side, obstacle_list, dots):
     dots_list_new = list(dots)
     if side == 'istok':  # Od istok se zavrtuvam na sever
         new_side = 'sever'
-        while x > 0 and x < 10 and [x - 1, y] not in obstacle_list:
+        if x > 0 and [x - 1, y] not in obstacle_list:
             x -= 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'zapad':
         new_side = 'jug'
-        while x < 10 and [x + 1, y] not in obstacle_list:
+        if x < 9 and [x + 1, y] not in obstacle_list:
             x += 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'jug':
         new_side = 'istok'
-        while y < 10 and [x, y + 1] not in obstacle_list:
+        if y < 9 and [x, y + 1] not in obstacle_list:
             y += 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x,y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
+
     if side == 'sever':
         new_side = 'zapad'
-        while y > 0 and y < 10 and [x, y - 1] not in obstacle_list:
+        if y > 0 and [x, y - 1] not in obstacle_list:
             y -= 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
 
@@ -506,34 +507,34 @@ def ProdolzhiPravo(x, y, side, obstacle_list, dots):
     dots_list_new = list(dots)
     if side == 'istok':
         new_side = 'istok'
-        while y < 10 and [x, y + 1] not in obstacle_list:
+        if y < 9 and [x, y + 1] not in obstacle_list:
             y += 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x,y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'zapad':
         new_side = 'zapad'
-        while y > 0 and y < 10 and [x, y - 1] not in obstacle_list:
+        if y > 0 and [x, y - 1] not in obstacle_list:
             y -= 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'jug':
         new_side = 'jug'
-        while x < 10 and [x + 1, y] not in obstacle_list:
+        if x < 9 and [x + 1, y] not in obstacle_list:
             x += 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'sever':
         new_side = 'sever'
-        while x > 0 and x < 10 and [x - 1, y] not in obstacle_list:
+        if x > 0 and [x - 1, y] not in obstacle_list:
             x -= 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
 
@@ -541,34 +542,34 @@ def ProdolzhiNazad(x, y, side, obstacle_list, dots):
     dots_list_new = list(dots)
     if side == 'istok':
         new_side = 'zapad'
-        while y > 0 and y < 10 and [x, y - 1] not in obstacle_list:
+        if y > 0 and [x, y - 1] not in obstacle_list:
             y -= 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'zapad':
         new_side = 'istok'
-        while y < 10 and [x, y + 1] not in obstacle_list:
+        if y < 9 and [x, y + 1] not in obstacle_list:
             y += 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x,y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'jug':
         new_side = 'sever'
-        while x > 0 and x < 10 and [x - 1, y] not in obstacle_list:
+        if x > 0 and [x - 1, y] not in obstacle_list:
             x -= 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
     if side == 'sever':
         new_side = 'jug'
-        while x < 10 and [x + 1, y] not in obstacle_list:
+        if x < 9 and [x + 1, y] not in obstacle_list:
             x += 1
-            if [x,y] in dots_list_new:
-                dots_list_new.remove([x,y])
+            if (x, y) in dots_list_new:
+                dots_list_new.remove((x, y))
         return [x, y, new_side, tuple(dots_list_new)]
 
 
@@ -584,15 +585,15 @@ class Pacman(Problem):
         y = state[1]
         side = state[2]
         dots = state[3]
-        print(dots)
+
 
         x_new, y_new, side_new, dots_tuple = ProdolzhiPravo(x, y, side, self.obstacle_list, dots)
         if x_new != x or y_new != y:
-            successors['ProdolziPravo'] = (x_new, y_new, side_new, tuple(dots_tuple))
+            successors['ProdolzhiPravo'] = (x_new, y_new, side_new, tuple(dots_tuple))
 
         x_new, y_new, side_new, dots_tuple = ProdolzhiNazad(x, y, side, self.obstacle_list, dots)
         if x_new != x or y_new != y:
-            successors['ProdolziNazad'] = (x_new, y_new, side_new, tuple(dots_tuple))
+            successors['ProdolzhiNazad'] = (x_new, y_new, side_new, tuple(dots_tuple))
 
         x_new, y_new, side_new, dots_tuple = SvrtiLevo(x, y, side, self.obstacle_list, dots)
         if x_new != x or y_new != y:
@@ -630,22 +631,15 @@ if __name__ == '__main__':
         str = input().split(',')
         for j in range(len(str)):
             l.append(int(str[j]))
-        dots_list.append(l)
+        dots_list.append(tuple(l))
 
-    obstacle_list = [[0, 0], [0, 1], [0, 2], [0, 3], [0, 6],
-                     [1, 0], [1, 8], [1, 9],
-                     [2, 8], [2, 9], [2, 4],
-                     [3, 0], [3, 3], [3, 4], [3, 5],
-                     [4, 4],
-                     [5, 1], [5, 8], [5, 9],
-                     [6, 1],
-                     [7, 1], [7, 6],
-                     [8, 4], [8, 5], [8, 6], [8, 8],
-                     [9, 6]]
+    obstacle_list = [[0, 9], [0, 8], [0, 6], [1, 9], [2, 9], [3, 9], [1, 2], [1, 3], [1, 4], [3, 6],
+                     [4, 6], [5, 6], [4, 1], [4, 5], [4, 7], [5, 1], [6, 9], [6, 0], [6, 1], [6, 2],
+                     [8, 1], [8, 4], [9, 4], [8, 7], [8, 8], [9, 7], [9, 8]]
 
     dots_tuple = tuple(dots_list)
 
-    pacman = Pacman(dots_list, obstacle_list, (player_x, player_y, look, dots_tuple))
+    pacman = Pacman(obstacle_list, (player_x, player_y, look, dots_tuple))
 
     result = breadth_first_graph_search(pacman)
-    print(result)
+    print(result.solution())
