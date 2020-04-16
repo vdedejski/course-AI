@@ -97,10 +97,6 @@ class Node:
         return "<Node %s>" % (self.state,)
 
     def __lt__(self, node):
-        print("node state --")
-        print(node.state)
-        print('self state ---')
-        print(self.state)
         return self.state < node.state
 
     def expand(self, problem):
@@ -446,8 +442,8 @@ def move_d1(current_state_tuple, index):  # Primam torka i index
         finalTuple = list[:]  # Lista kopiram vo lista
         return tuple(finalTuple)  # Vrakam torka
     value = list[index]
-    if list[index + 1] == '|':
-        list[index] = '|'
+    if list[index + 1] == 0:
+        list[index] = 0
         list[index + 1] = value
         finalTuple = list[:]
         return tuple(finalTuple)
@@ -461,8 +457,8 @@ def move_d2(current_state_tuple, index):
         finalTuple = list[:]
         return tuple(finalTuple)
     value = list[index]
-    if isinstance(list[index + 1], int) and list[index + 2] == '|':
-        list[index] = '|'
+    if isinstance(list[index + 1], int) and list[index + 2] == 0:
+        list[index] = 0
         list[index + 2] = value
         finalTuple = list[:]
         return tuple(finalTuple)
@@ -476,8 +472,8 @@ def move_l1(current_state_tuple, index):
         finalTuple = list[:]
         return tuple(finalTuple)
     value = list[index]
-    if list[index - 1] == '|':
-        list[index] = '|'
+    if list[index - 1] == 0:
+        list[index] = 0
         list[index - 1] = value
         finalTuple = list[:]
         return tuple(finalTuple)
@@ -491,8 +487,8 @@ def move_l2(current_state_tuple, index):  # Primam torka i index
         finalTuple = list[:]  # Lista kopiram vo lista
         return tuple(finalTuple)  # Vrakam torka
     value = list[index]
-    if isinstance(list[index - 1], int) and list[index - 2] == '|':
-        list[index] = '|'
+    if isinstance(list[index - 1], int) and list[index - 2] == 0:
+        list[index] = 0
         list[index - 2] = value
         finalTuple = list[:]
         return tuple(finalTuple)
@@ -510,23 +506,29 @@ class Disks(Problem):
         i = 0
         index = 1
         if initialList != None:
+
             while index < len(initialList) + 1:
                 if isinstance(initialList[i], int):
+
                     change_list = move_d1(initialList, i)
                     if change_list != initialList:
                         successors[f'D1: Disk {initialList[i]}'] = change_list
+
                     change_list = move_d2(initialList, i)
                     if change_list != initialList:
                         successors[f'D2: Disk {initialList[i]}'] = change_list
+
                     change_list = move_l1(initialList, i)
                     if change_list != initialList:
                         successors[f'L1: Disk {initialList[i]}'] = change_list
+
                     change_list = move_l2(initialList, i)
                     if change_list != initialList:
                         successors[f'L2: Disk {initialList[i]}'] = change_list
+
                 i += 1
                 index += 1
-        # print(successors)
+
         return successors
 
     def actions(self, state):
@@ -548,14 +550,19 @@ class Disks(Problem):
         goal state = ['|', '|', '|', '|', '|', 3, 2, 1]
         """
 
-        # print(currState)
-        # print(self.goal)
+        #h1 == h2
+        # for x, y in zip(currState, goalState):
+        #     if x > 0 and y > 0:
+        #         if x != y:
+        #             counter += 1
 
+        #h2
         for x, y in zip(currState, goalState):
-            if x != y:
-                counter += 1
+                if x != y:
+                    counter += 1
 
-        # for x in currState: # Ova e ednakvo so pogore
+        # h3 - ist pristap bez zip()
+        # for x in currState:
         #     currIndex = currState.index(x)
         #     wantedIndex = goalState.index(x)
         #     if currIndex != wantedIndex:
@@ -572,11 +579,11 @@ if __name__ == '__main__':
     for i in range(1, nDisks + 1):
         initialList.append(i)
     for i in range(slots - nDisks):
-        initialList.append("|")
+        initialList.append(0)
     for i in range(1, nDisks + 1):
         goalList.append(i)
     for i in range(slots - nDisks):
-        goalList.append("|")
+        goalList.append(0)
     goalList.reverse()
     initialList = tuple(initialList)
     goalList = tuple(goalList)

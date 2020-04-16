@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/AV5-CSPs.iml" filepath="$PROJECT_DIR$/.idea/AV5-CSPs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Lab04-CSP/.idea/Lab04-CSP.iml" filepath="$PROJECT_DIR$/../Lab04-CSP/.idea/Lab04-CSP.iml" />
+    </modules>
+  </component>
+</project>
