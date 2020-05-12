@@ -7,5 +7,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Lab04-CSP" />
+    <orderEntry type="module" module-name="course-AI-Homework-1" />
   </component>
 </module>

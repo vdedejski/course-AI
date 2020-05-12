@@ -8,6 +8,7 @@ if __name__ == '__main__':
         for j in range(0, 8):
             domain.append((i, j))
 
+
     rooks = range(1, 9)
 
     problem.addVariables(rooks, domain)
