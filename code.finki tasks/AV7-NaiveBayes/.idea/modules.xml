@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../AV5-CSPs/.idea/AV5-CSPs.iml" filepath="$PROJECT_DIR$/../AV5-CSPs/.idea/AV5-CSPs.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/AV7-NaiveBayes.iml" filepath="$PROJECT_DIR$/.idea/AV7-NaiveBayes.iml" />
     </modules>
   </component>
