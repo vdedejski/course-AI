@@ -7,5 +7,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="AV5-CSPs" />
+    <orderEntry type="module" module-name="decisiontree" />
+    <orderEntry type="module" module-name="decisiontree" />
+    <orderEntry type="module" module-name="AV8-DecisionTree" />
   </component>
 </module>
