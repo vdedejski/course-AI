@@ -192,7 +192,7 @@ if __name__ == '__main__':
     print(f'Accuracy: {correct_samples / len(test_set)}')
 
     entry = np.delete([entry], col_index, 1)
-    
+
     prediction = classifier.predict(entry)
     print(prediction[0])
 
